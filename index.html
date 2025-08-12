@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZE Invest – Investice do udržitelné budoucnosti</title>
+  <meta name="description" content="ZE Invest vyvíjí projekty větrné energie. Stabilní výnos, čistá energie, lokální přínos.">
+  <meta name="theme-color" content="#2f6f93">
+  <!-- Open Graph -->
+  <meta property="og:title" content="ZE Invest – Investice do udržitelné budoucnosti">
+  <meta property="og:description" content="Vítr pro stabilní a nezávislou budoucnost.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1200&auto=format&fit=crop">
+  <style>
+    :root{
+      --brand-blue:#2f6f93;   /* hero pruh */
+      --brand-blue-600:#2a6282;
+      --brand-green:#3b7f2f;  /* nadpisy, CTA */
+      --text:#1a1a1a;
+      --muted:#5c6b74;
+      --bg:#ffffff;
+      --card:#f6f8f9;
+      --ring: #cfe6f3;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);scroll-behavior:smooth}
+    img{max-width:100%;display:block;border-radius:12px}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1200px,92%);margin-inline:auto}
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:#fff8;backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #e9eef2}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0}
+    .brand{display:flex;align-items:center;gap:.6rem;font-weight:700}
+    .brand svg{width:28px;height:28px;flex:0 0 28px}
+    .menu{display:flex;gap:1.2rem;align-items:center}
+    .menu a{padding:.5rem .6rem;border-radius:10px}
+    .menu a:hover{background:#f2f6f8}
+    .btn{display:inline-block;background:var(--brand-green);color:#fff;padding:.75rem 1.1rem;border-radius:999px;font-weight:600;box-shadow: 0 6px 18px rgba(59,127,47,.25)}
+    .btn:hover{filter:brightness(.95)}
+    /* HERO */
+    .hero{background:var(--brand-blue);color:#fff}
+    .hero .container{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:4rem 0}
+    .hero h1{font-size:clamp(1.8rem,3.2vw,2.6rem);line-height:1.2;margin:0 0 .6rem}
+    .hero p{color:#e3f3ff;margin:0 0 1.2rem}
+    .hero-card{background:#ffffff10;border:1px solid #ffffff30;border-radius:var(--radius);padding:1rem}
+    /* SECTIONS */
+    section{padding:3.2rem 0}
+    h2{color:var(--brand-green);font-size:clamp(1.4rem,2.4vw,2rem);margin:0 0 1.4rem}
+    .lead{color:var(--muted);max-width:780px}
+    /* GRID */
+    .grid{display:grid;gap:1.6rem}
+    .cols-2{grid-template-columns:1.05fr .95fr}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    /* CARDS */
+    .card{background:var(--card);border:1px solid #e7edf1;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+    .icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#eaf4ea;margin-bottom:.6rem}
+    .list{display:grid;gap:.6rem;margin:1rem 0 0;padding:0}
+    .list li{list-style:none;display:flex;gap:.6rem;align-items:flex-start}
+    .tick{color:var(--brand-green);font-weight:700}
+    /* CTA bar */
+    .cta{background:linear-gradient(180deg,#f7fbfe,#eef6fa);border-top:1px solid #e6eef4;border-bottom:1px solid #e6eef4}
+    .cta .bar{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;justify-content:space-between;padding:1.6rem 0}
+    /* FOOTER */
+    footer{padding:2.2rem 0;color:#63727c;border-top:1px solid #e6eef4}
+    .mute{color:#7b8a94}
+    /* CONTACT */
+    form{display:grid;gap:.8rem}
+    input,textarea{width:100%;padding:.85rem 1rem;border:1px solid #d9e3ea;border-radius:12px;outline:none}
+    input:focus,textarea:focus{border-color:#b8d7ea;box-shadow:0 0 0 4px var(--ring)}
+    textarea{min-height:140px;resize:vertical}
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .hero .container{grid-template-columns:1fr}
+      .cols-2{grid-template-columns:1fr}
+      .cols-3{grid-template-columns:1fr}
+      .nav-inner{gap:.8rem}
+    }
+  </style>
+  <script>
+    // jednoduché zvýraznění aktivní položky při scrollu
+    document.addEventListener('DOMContentLoaded',()=>{
+      const links=[...document.querySelectorAll('.menu a')];
+      const ids=links.map(a=>document.querySelector(a.getAttribute('href')));
+      const onScroll=()=>{
+        const y=scrollY+120;
+        let active=0;
+        ids.forEach((el,i)=>{ if(el && el.offsetTop<=y) active=i; });
+        links.forEach((a,i)=>a.style.fontWeight=i===active?'700':'500');
+      };
+      document.addEventListener('scroll',onScroll,{passive:true});
+      onScroll();
+    });
+  </script>
+  <!-- Strukturovaná data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"ZE Invest",
+    "url":"https://ze-invest-web.pages.dev",
+    "logo":"https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=400&auto=format&fit=crop",
+    "sameAs":[]
+  }
+  </script>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="ZE Invest domů">
+        <img src="public/logo.png" alt="ZE Invest logo" style="max-width:200px; margin-bottom:1rem;">  
+      </a>
+      <div class="menu" role="navigation" aria-label="Hlavní menu">
+        <a href="#o-nas">O nás</a>
+        <a href="#projekt">Projekt</a>
+        <a href="#vyhody">Výhody</a>
+        <a href="#kontakt" class="btn">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="hero" role="banner">
+    <div class="container">
+        <div>
+            <img src="public/wind-turbine.jpg" alt="Větrná turbína na horizontu">
+        </div>
+        <div>
+            <h1>Investice do udržitelné budoucnosti</h1>
+            <p>Vítr pro stabilní a nezávislou budoucnost. Dlouhodobý provoz, lokální přínos a čistá energie.</p>
+            <a class="btn" href="#o-nas" aria-label="Zjistit více o společnosti ZE Invest">Zjistit více</a>
+      </div>
+      
+    </div>
+  </header>
+
+  <!-- O NÁS -->
+  <section id="o-nas">
+    <div class="container cols-2 grid">
+      <div>
+        <h2>Náš projekt větrné energie</h2>
+        <p class="lead">
+          ZE&nbsp;Invest se věnuje vývoji udržitelných řešení větrné energie. Využíváme moderní technologie a pečlivý výběr lokalit pro maximální efektivitu výroby a minimální dopad na okolí.
+        </p>
+        <ul class="list">
+          <li><span class="tick">✓</span><span>Dlouhodobý provoz – nejsme „postavit a prodat“, ale <strong>stavět a provozovat</strong>.</span></li>
+          <li><span class="tick">✓</span><span>Stabilní výnos podpořený dlouhodobými smlouvami na odběr elektřiny.</span></li>
+          <li><span class="tick">✓</span><span>Lokální spolupráce s obcemi, transparentní komunikace.</span></li>
+        </ul>
+      </div>
+      <div>
+        <img src="public/projekt.png" alt="Rodina kupuje energii z větrné farmy" style="max-width:100%;border-radius:12px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJEKT – DETAIL -->
+  <section id="projekt">
+    <div class="container">
+      <h2>Parametry aktuálního projektu</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="icon" aria-hidden="true">⚡</div>
+          <h3>Kapacita</h3>
+          <p>Plánované 3&nbsp;VTE s instalovaným výkonem až 15&nbsp;MW<small>*</small>.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">📍</div>
+          <h3>Lokalita</h3>
+          <p>Ještě se řeší</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">📄</div>
+          <h3>Stav</h3>
+          <p>Probíhá povolovací proces, technická příprava a jednání s partnery.</p>
+        </div>
+      </div>
+      <p class="mute" style="margin-top:.6rem"><small>* upřesní se dle finální specifikace turbín a výsledků EIA.</small></p>
+    </div>
+  </section>
+
+  <!-- VÝHODY -->
+  <section id="vyhody">
+    <div class="container">
+      <h2>Proč dává náš projekt smysl</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Ekologie</h3>
+          <p>Čistá energie bez emisí CO₂, minimální záběr půdy a šetrný provoz.</p>
+        </div>
+        <div class="card">
+          <h3>Dlouhodobá odpovědnost</h3>
+          <p>Nevznikáme proto, abychom postavili a prodali. Chceme naše elektrárny dlouhodobě provozovat, udržovat a modernizovat, aby přinášely užitek po desítky let.</p>
+        </div>
+        <div class="card">
+          <h3>Přínos pro okolí</h3>
+          <p>Podporujeme rozvoj obcí, místní infrastruktury a aktivit, které zvyšují kvalitu života. Chceme, aby projekt byl zdrojem hrdosti, ne obav.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA pruh -->
+  <section class="cta">
+    <div class="container bar">
+      <div>
+        <strong>Chcete se dozvědět více?</strong><br>
+        Rádi s vámi probereme vše co chcete vědět.
+      </div>
+      <a class="btn" href="#kontakt">Ozvěte se nám</a>
+    </div>
+  </section>
+
+   <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="container cols-2 grid">
+      <div>
+        <h2>Kontaktujte nás</h2>
+        <p class="lead">Ozveme se vám s detailními informacemi o projektu.</p>
+        <form action="mailto:info@zeinvest.cz" method="post" enctype="text/plain">
+          <input name="Jméno" type="text" placeholder="Vaše jméno" required style="width:100%;padding:.8rem;margin-bottom:.6rem;">
+          <input name="Email" type="email" placeholder="Váš e-mail" required style="width:100%;padding:.8rem;margin-bottom:.6rem;">
+          <textarea name="Zpráva" placeholder="Zpráva" style="width:100%;padding:.8rem;margin-bottom:.6rem;"></textarea>
+          <button class="btn" type="submit">Odeslat</button>
+        </form>
+      </div>
+      <div>
+        <img src="public/vte-cow.png" alt="Větrná farma při západu slunce">
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:2rem 0;background:#f4f6f7;color:var(--muted);">
+    <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div>© <span id="y"></span> ZE Invest</div>
+      <div>IČO: 222 68 715 • Chrustenice 179, 267 12 Chrustenice</div>
+    </div>
+    <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  </footer>
+
+</body>
+</html>
