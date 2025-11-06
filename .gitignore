@@ -16,3 +16,14 @@ yarn-error.log*
 dist/
 build/
 coverage/
+
+# Next.js
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Cloudflare
+.dev.vars
