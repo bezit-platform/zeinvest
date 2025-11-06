@@ -259,12 +259,68 @@
       <div>
         <h2>Kontaktujte nás</h2>
         <p class="lead">Ozveme se vám s detailními informacemi o projektu.</p>
-        <form action="mailto:info@zeinvest.cz" method="post" enctype="text/plain">
-          <input name="Jméno" type="text" placeholder="Vaše jméno" required style="width:100%;padding:.8rem;margin-bottom:.6rem;">
-          <input name="Email" type="email" placeholder="Váš e-mail" required style="width:100%;padding:.8rem;margin-bottom:.6rem;">
-          <textarea name="Zpráva" placeholder="Zpráva" style="width:100%;padding:.8rem;margin-bottom:.6rem;"></textarea>
-          <button class="btn" type="submit">Odeslat</button>
+        <form id="contactForm" style="position:relative;">
+          <input id="jmeno" name="jmeno" type="text" placeholder="Vaše jméno" required style="width:100%;padding:.8rem;margin-bottom:.6rem;">
+          <input id="email" name="email" type="email" placeholder="Váš e-mail" required style="width:100%;padding:.8rem;margin-bottom:.6rem;">
+          <textarea id="zprava" name="zprava" placeholder="Zpráva" style="width:100%;padding:.8rem;margin-bottom:.6rem;"></textarea>
+          <button class="btn" type="submit" id="submitBtn">Odeslat</button>
+          <div id="formMessage" style="margin-top:1rem;display:none;padding:1rem;border-radius:8px;"></div>
         </form>
+        <script>
+          // Odeslání formuláře přes Cloudflare Pages Function
+          document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            const originalBtnText = submitBtn.textContent;
+            
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Odesílám...';
+            formMessage.style.display = 'none';
+            
+            try {
+              const formData = {
+                jmeno: document.getElementById('jmeno').value,
+                email: document.getElementById('email').value,
+                zprava: document.getElementById('zprava').value
+              };
+              
+              const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+              });
+              
+              const result = await response.json();
+              
+              if (response.ok && result.success) {
+                // Success
+                formMessage.style.display = 'block';
+                formMessage.style.backgroundColor = '#eaf4ea';
+                formMessage.style.color = '#3b7f2f';
+                formMessage.textContent = '✓ Děkujeme! Vaše zpráva byla odeslána.';
+                document.getElementById('contactForm').reset();
+              } else {
+                // Error
+                formMessage.style.display = 'block';
+                formMessage.style.backgroundColor = '#fee';
+                formMessage.style.color = '#c00';
+                formMessage.textContent = '✗ Něco se pokazilo. Zkuste to prosím znovu.';
+              }
+            } catch (error) {
+              console.error('Form error:', error);
+              formMessage.style.display = 'block';
+              formMessage.style.backgroundColor = '#fee';
+              formMessage.style.color = '#c00';
+              formMessage.textContent = '✗ Chyba při odesílání. Zkuste to prosím znovu.';
+            } finally {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalBtnText;
+            }
+          });
+        </script>
       </div>
       <div>
         <img src="public/vte-cow.png" alt="Větrná farma při západu slunce">
