@@ -60,9 +60,15 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch('/api/contact', {
+      // Use absolute URL or relative path for Cloudflare Pages Functions
+      const apiUrl = window.location.origin + '/api/contact'
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify(data)
       })
 
