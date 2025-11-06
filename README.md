@@ -1,6 +1,6 @@
 # ZE Invest – Investice do udržitelné budoucnosti
 
-Statický web s Cloudflare Pages Functions pro ZE Invest - projekty větrné energie.
+Next.js aplikace s Cloudflare Pages Functions pro ZE Invest - projekty větrné energie.
 
 ## 🌬️ O projektu
 
@@ -8,14 +8,16 @@ ZE Invest se věnuje vývoji udržitelných řešení větrné energie. Tato web
 
 ## 🚀 Technologie
 
-- **HTML/CSS/JavaScript** - Čistý statický web
+- **Next.js 14** - React framework se statickým exportem
+- **React 18** - UI knihovna
+- **TypeScript** - Typová bezpečnost
 - **Cloudflare Pages** - Hosting a deployment
 - **Cloudflare Pages Functions** - Serverless API pro kontaktní formulář
 - **Resend API** - Odesílání emailů
 
 ## 📋 Předpoklady
 
-- Node.js verze 15 nebo vyšší (jen pro lokální development)
+- Node.js verze 15 nebo vyšší
 - npm (Node Package Manager)
 - Cloudflare account pro deployment
 
@@ -27,9 +29,16 @@ git clone https://github.com/bezit-platform/zeinvest.git
 cd zeinvest
 ```
 
-2. Nainstalujte dev závislosti (volitelné, jen pro lokální server):
+2. Nainstalujte závislosti:
 ```bash
 npm install
+```
+
+3. Vytvořte `.dev.vars` soubor pro lokální vývoj:
+```
+RESEND_API_KEY=your_resend_api_key
+MAIL_TO=recipient@example.com
+MAIL_FROM=sender@example.com
 ```
 
 ## 🏃 Spuštění
@@ -41,6 +50,19 @@ npm run dev
 
 Aplikace poběží na `http://localhost:3000`
 
+### Build pro production:
+```bash
+npm run build
+```
+
+Statické soubory budou ve složce `out/`
+
+### Testování s Cloudflare Functions lokálně:
+```bash
+npm run build
+npx wrangler pages dev out
+```
+
 ### Produkce (Cloudflare Pages):
 1. Commitněte změny do Git
 2. Pushnete na GitHub
@@ -50,19 +72,26 @@ Aplikace poběží na `http://localhost:3000`
 
 ```
 zeinvest/
-├── functions/           # Cloudflare Pages Functions
+├── src/
+│   └── app/
+│       ├── layout.tsx       # Root layout s metadaty
+│       ├── page.tsx         # Hlavní stránka (React)
+│       └── globals.css      # Globální styly
+├── functions/               # Cloudflare Pages Functions
 │   └── api/
-│       ├── _middleware.js    # CORS middleware
-│       ├── contact.js        # Kontaktní formulář API
-│       └── test.js           # Test endpoint
-├── public/              # Statické soubory (obrázky, loga)
+│       ├── _middleware.js   # CORS middleware
+│       ├── contact.js       # Kontaktní formulář API
+│       └── test.js          # Test endpoint
+├── public/                  # Statické soubory (obrázky, loga)
 │   ├── logo.png
 │   ├── projekt.png
 │   ├── vte-cow.png
 │   └── wind-turbine.jpg
-├── index.html           # Hlavní HTML stránka
-├── package.json         # Node.js konfigurace
-└── README.md           # Dokumentace
+├── out/                     # Build výstup (statický export)
+├── next.config.js           # Next.js konfigurace
+├── tsconfig.json            # TypeScript konfigurace
+├── package.json             # Node.js konfigurace
+└── README.md                # Dokumentace
 ```
 
 ## 🌍 Nasazení na Cloudflare Pages
@@ -75,8 +104,8 @@ zeinvest/
 
 ### 2. Build nastavení
 
-- **Build command:** (prázdné - statický web)
-- **Build output directory:** `/`
+- **Build command:** `npm run build`
+- **Build output directory:** `out`
 - **Root directory:** `/`
 
 ### 3. Environment Variables
