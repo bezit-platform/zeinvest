@@ -88,7 +88,7 @@ export default function Home() {
       <nav className="nav">
         <div className="container nav-inner">
           <a className="brand" href="#top" aria-label="ZE Invest domů">
-            <img src="public/logo.png" alt="ZE Invest logo" style={{ maxWidth: '200px', marginBottom: '1rem' }} />
+            <img src="/logo.png" alt="ZE Invest logo" style={{ maxWidth: '200px', marginBottom: '1rem' }} />
           </a>
           <div className="menu" role="navigation" aria-label="Hlavní menu">
             <a href="#o-nas">O nás</a>
@@ -103,7 +103,7 @@ export default function Home() {
       <header id="top" className="hero" role="banner">
         <div className="container">
           <div>
-            <img src="public/wind-turbine.jpg" alt="Větrná turbína na horizontu" />
+            <img src="/wind-turbine.jpg" alt="Větrná turbína na horizontu" />
           </div>
           <div>
             <h1>Investice do udržitelné budoucnosti</h1>
@@ -128,7 +128,7 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <img src="public/projekt.png" alt="Rodina kupuje energii z větrné farmy" style={{ maxWidth: '100%', borderRadius: '12px' }} />
+            <img src="/projekt.png" alt="Rodina kupuje energii z větrné farmy" style={{ maxWidth: '100%', borderRadius: '12px' }} />
           </div>
         </div>
       </section>
@@ -238,7 +238,7 @@ export default function Home() {
             </form>
           </div>
           <div>
-            <img src="public/vte-cow.png" alt="Větrná farma při západu slunce" />
+            <img src="/vte-cow.png" alt="Větrná farma při západu slunce" />
           </div>
         </div>
       </section>

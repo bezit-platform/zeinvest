@@ -17,7 +17,7 @@ ZE Invest se věnuje vývoji udržitelných řešení větrné energie. Tato web
 
 ## 📋 Předpoklady
 
-- Node.js verze 15 nebo vyšší
+- Node.js verze 18 nebo vyšší (doporučeno 20+)
 - npm (Node Package Manager)
 - Cloudflare account pro deployment
 
