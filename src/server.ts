@@ -1,7 +1,7 @@
-const express = require('express');
-const path = require('path');
-const compression = require('compression');
-const helmet = require('helmet');
+import express, { Request, Response, NextFunction } from 'express';
+import path from 'path';
+import compression from 'compression';
+import helmet from 'helmet';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,20 +15,20 @@ app.use(helmet({
 app.use(compression());
 
 // Statické soubory (obrázky, loga, atd.)
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, '../public')));
 
 // Hlavní stránka
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get('/', (_req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 // 404 handler
-app.use((req, res) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).send('<h1>404 - Stránka nenalezena</h1><p><a href="/">Zpět na hlavní stránku</a></p>');
 });
 
 // Error handler
-app.use((err, req, res, next) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('<h1>500 - Chyba serveru</h1>');
 });
@@ -39,4 +39,4 @@ app.listen(PORT, () => {
   console.log(`📁 Statické soubory servirovány z /public`);
 });
 
-module.exports = app;
+export default app;

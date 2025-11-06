@@ -1,6 +1,6 @@
 # ZE Invest – Investice do udržitelné budoucnosti
 
-Node.js webová aplikace pro ZE Invest - projekty větrné energie.
+TypeScript webová aplikace pro ZE Invest - projekty větrné energie.
 
 ## 🌬️ O projektu
 
@@ -8,6 +8,7 @@ ZE Invest se věnuje vývoji udržitelných řešení větrné energie. Tato web
 
 ## 🚀 Technologie
 
+- **TypeScript 5.3+** - Typovaný JavaScript
 - **Node.js 15+** - Runtime prostředí
 - **Express.js** - Web framework
 - **Helmet** - Bezpečnostní middleware
@@ -31,10 +32,16 @@ cd zeinvest
 npm install
 ```
 
+3. Zkompilujte TypeScript kód:
+```bash
+npm run build
+```
+
 ## 🏃 Spuštění
 
 ### Produkční režim:
 ```bash
+npm run build
 npm start
 ```
 
@@ -43,19 +50,27 @@ npm start
 npm run dev
 ```
 
+### Sledování změn TypeScript:
+```bash
+npm run watch
+```
+
 Aplikace poběží na `http://localhost:3000`
 
 ## 📁 Struktura projektu
 
 ```
 zeinvest/
+├── src/                 # TypeScript zdrojové soubory
+│   └── server.ts        # Express server
+├── dist/                # Zkompilované JavaScript soubory
 ├── public/              # Statické soubory (obrázky, loga)
 │   ├── logo.png
 │   ├── projekt.png
 │   ├── vte-cow.png
 │   └── wind-turbine.jpg
 ├── index.html           # Hlavní HTML stránka
-├── server.js            # Express server
+├── tsconfig.json        # TypeScript konfigurace
 ├── package.json         # Node.js konfigurace
 └── README.md           # Dokumentace
 ```
