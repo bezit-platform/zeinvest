@@ -77,6 +77,23 @@
       .cols-3{grid-template-columns:1fr}
       .nav-inner{gap:.8rem}
     }
+    /* COOKIE CONSENT */
+    .cookie-consent{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e0e0e0;box-shadow:0 -4px 20px rgba(0,0,0,.1);padding:1.2rem 0;z-index:100;display:none}
+    .cookie-consent.show{display:block}
+    .cookie-content{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+    .cookie-text{flex:1;min-width:280px;color:var(--text);font-size:.95rem;line-height:1.5}
+    .cookie-text a{color:var(--brand-green);text-decoration:underline}
+    .cookie-buttons{display:flex;gap:.8rem;flex-wrap:wrap}
+    .cookie-btn{padding:.7rem 1.3rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:.9rem;transition:all .2s}
+    .cookie-btn.accept{background:var(--brand-green);color:#fff}
+    .cookie-btn.accept:hover{filter:brightness(.95)}
+    .cookie-btn.decline{background:#f0f0f0;color:var(--text)}
+    .cookie-btn.decline:hover{background:#e5e5e5}
+    @media (max-width: 900px){
+      .cookie-content{flex-direction:column;align-items:flex-start}
+      .cookie-buttons{width:100%}
+      .cookie-btn{flex:1}
+    }
   </style>
   <script>
     // jednoduché zvýraznění aktivní položky při scrollu
@@ -91,6 +108,29 @@
       };
       document.addEventListener('scroll',onScroll,{passive:true});
       onScroll();
+
+      // Cookie consent management
+      const cookieConsent=document.getElementById('cookie-consent');
+      const acceptBtn=document.getElementById('cookie-accept');
+      const declineBtn=document.getElementById('cookie-decline');
+      
+      // Kontrola, zda už uživatel neudělil souhlas
+      if(!localStorage.getItem('cookieConsent')){
+        setTimeout(()=>cookieConsent.classList.add('show'),800);
+      }
+      
+      acceptBtn?.addEventListener('click',()=>{
+        localStorage.setItem('cookieConsent','accepted');
+        cookieConsent.classList.remove('show');
+        // Zde můžete aktivovat Google Analytics nebo jiné tracking cookies
+        console.log('Cookies accepted');
+      });
+      
+      declineBtn?.addEventListener('click',()=>{
+        localStorage.setItem('cookieConsent','declined');
+        cookieConsent.classList.remove('show');
+        console.log('Cookies declined');
+      });
     });
   </script>
   <!-- Strukturovaná data -->
@@ -234,11 +274,28 @@
 
   <footer style="padding:2rem 0;background:#f4f6f7;color:var(--muted);">
     <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-      <div>© <span id="y"></span> ZE Invest</div>
+      <div>© <span id="y"></span> ZE Invest | Web vytvořilo <a href="https://www.bezit.cz" target="_blank" rel="noopener" style="color:var(--brand-green);text-decoration:none;font-weight:600">www.bezit.cz</a></div>
       <div>IČO: 222 68 715 • Chrustenice 179, 267 12 Chrustenice</div>
     </div>
     <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" class="cookie-consent">
+    <div class="container">
+      <div class="cookie-content">
+        <div class="cookie-text">
+          🍪 Tento web používá cookies pro zajištění správné funkčnosti a analytických účelů. 
+          Používáním webu souhlasíte s používáním cookies v souladu s našimi 
+          <a href="#" onclick="alert('Zásady ochrany osobních údajů budou brzy k dispozici'); return false;">zásadami ochrany osobních údajů</a>.
+        </div>
+        <div class="cookie-buttons">
+          <button id="cookie-decline" class="cookie-btn decline">Odmítnout</button>
+          <button id="cookie-accept" class="cookie-btn accept">Přijmout vše</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
