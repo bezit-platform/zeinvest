@@ -72,7 +72,8 @@ export default function Home() {
         setFormMessage({ type: 'success', text: '✓ Děkujeme! Vaše zpráva byla odeslána.' })
         ;(e.target as HTMLFormElement).reset()
       } else {
-        setFormMessage({ type: 'error', text: '✗ Něco se pokazilo. Zkuste to prosím znovu.' })
+        console.error('API error:', result)
+        setFormMessage({ type: 'error', text: `✗ Chyba: ${result.message || 'Něco se pokazilo'}` })
       }
     } catch (error) {
       console.error('Form error:', error)
